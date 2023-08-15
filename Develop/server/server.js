@@ -1,6 +1,5 @@
 const express = require('express');
-const { ApolloServer } = require('@apollo/server/express');
-const { expressMiddleware } = require('@apollo/server/express');
+const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 
 const db = require('./config/connection');
@@ -24,9 +23,8 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
-  app.use('/graphql', expressMiddleware(server, {
-    context: authMiddleware
-  }));
+  server.applyMiddleware({ app, path: '/graphql', context: authMiddleware });
+
 
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/dist')));
