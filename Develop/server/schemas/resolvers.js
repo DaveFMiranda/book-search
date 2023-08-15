@@ -4,13 +4,13 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate("books");
+      return User.find().populate("savedBooks");
     },
     user: async (parent, { username, _id }) => {
       return User.findOne({
         ...(_id ? { _id } : {}),
         ...(username ? { username } : {}),
-      }).populate("books");
+      }).populate("savedBooks");
     },
   },
 
@@ -33,9 +33,9 @@ const resolvers = {
       return { token, user };
     },
 
-    addBook: async (parent, { body }, context) => {
+    addBook: async (parent, { input }, context) => {
       if (context.user) {
-        const { authors, description, bookId, image, link, title } = body;
+        const { authors, description, bookId, image, link, title } = input;
 
         const book = await Book.create({
           authors,
@@ -51,8 +51,7 @@ const resolvers = {
         );
         return book;
       }
-      throw AuthenticationError;
-      ("You need to be logged in!");
+      throw AuthenticationError("You need to be logged in!");
     },
 
     removeBook: async (parent, { bookId }, context) => {
@@ -67,7 +66,8 @@ const resolvers = {
         );
         return book;
       }
-      throw AuthenticationError;
+      throw AuthenticationError("You need to be logged in!");
+
     },
   },
 };
