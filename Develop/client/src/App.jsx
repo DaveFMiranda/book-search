@@ -4,8 +4,15 @@ import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 
+import {
+  ApolloProvider,
+} from '@apollo/client';
+
+
+
 function App() {
   return (
+    <ApolloProvider>
     <Router>
       <>
         <Navbar />
@@ -16,6 +23,7 @@ function App() {
         </Switch>
       </>
     </Router>
+    </ApolloProvider>
   );
 }
 
