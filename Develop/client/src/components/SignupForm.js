@@ -36,13 +36,12 @@ const SignupForm = () => {
     try {
       const { data } = await addUser({
         variables: {
-          input: {
             username: userFormData.username,
             email: userFormData.email,
             password: userFormData.password
           },
 
-        },
+        
 
       });
       

@@ -35,15 +35,12 @@ const resolvers = {
 
     addBook: async (parent, { input }, context) => {
       if (context.user) {
-        const { authors, description, bookId, image, link, title } = input;
+        
 
         const book = await Book.create({
-          authors,
-          description,
-          bookId,
-          image,
-          link,
-          title,
+          ...input
+
+
         });
         await User.findOneAndUpdate(
           { _id: context.user._id },
