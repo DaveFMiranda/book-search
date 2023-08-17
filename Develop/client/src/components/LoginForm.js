@@ -2,13 +2,18 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
+// DAVE DELETE LIN 6
 import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
+import { LOGIN_USER } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [login, { error, data }] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -26,13 +31,27 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await loginUser(userFormData);
+      const {data} = await login({
+        variables: {
+          input: {
+            username: userFormData.username,
+            email: userFormData.email,
+            password: userFormData.password
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
+          },
+
+        },
+
+      });
+      
+      
+
+      if (!data.login) {
+        throw new Error('Failed to create user');
       }
 
-      const { token, user } = await response.json();
+      const token = data.login.token;
+      const user = data.login.user;      
       console.log(user);
       Auth.login(token);
     } catch (err) {
