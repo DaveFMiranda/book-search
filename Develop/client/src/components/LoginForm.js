@@ -33,12 +33,12 @@ const LoginForm = () => {
     try {
       const {data} = await login({
         variables: {
-          input: {
+          
             username: userFormData.username,
             email: userFormData.email,
             password: userFormData.password
 
-          },
+          
 
         },
 

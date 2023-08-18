@@ -12,6 +12,12 @@ const resolvers = {
         ...(username ? { username } : {}),
       }).populate("savedBooks");
     },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate('savedBooks');
+      }
+      throw AuthenticationError;
+    },
   },
 
   Mutation: {
@@ -35,16 +41,15 @@ const resolvers = {
 
     addBook: async (parent, { input }, context) => {
       if (context.user) {
-        const { authors, description, bookId, image, link, title } = input;
+console.log("Input:", input);
 
         const book = await Book.create({
-          authors,
-          description,
-          bookId,
-          image,
-          link,
-          title,
+          ...input
+
+
         });
+        console.log("Book model:", book);
+
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { savedBooks: book._id } }
