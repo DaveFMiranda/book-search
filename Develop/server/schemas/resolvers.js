@@ -41,13 +41,15 @@ const resolvers = {
 
     addBook: async (parent, { input }, context) => {
       if (context.user) {
-        
+console.log("Input:", input);
 
         const book = await Book.create({
           ...input
 
 
         });
+        console.log("Book model:", book);
+
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { savedBooks: book._id } }
