@@ -12,6 +12,12 @@ const resolvers = {
         ...(username ? { username } : {}),
       }).populate("savedBooks");
     },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate('savedBooks');
+      }
+      throw AuthenticationError;
+    },
   },
 
   Mutation: {

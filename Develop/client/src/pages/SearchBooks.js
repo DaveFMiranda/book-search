@@ -71,14 +71,12 @@ const SearchBooks = () => {
     try {
       const { data } = await addBook({
         variables: {
-          
-            authors: bookToSave.authors,
-            description: bookToSave.description,
-            bookId: bookToSave.bookId,
-            image: bookToSave.image,
-            link: bookToSave.link,
-            title: bookToSave.title,
-          
+          authors: bookToSave.authors,
+          description: bookToSave.description,
+          bookId: bookToSave.bookId,
+          image: bookToSave.image,
+          link: bookToSave.link,
+          title: bookToSave.title,
         },
       });
 
