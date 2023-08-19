@@ -9,7 +9,7 @@ Here's a link to the deployed site: https://book-search-dfm-917cd4c03351.herokua
 
 Here's a screenshot: 
 
-![Screenshot](/assets/screenshot1.png)
+![Screenshot](/assets/screenshot.png)
 
 ## Table of Contents
 
