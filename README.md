@@ -5,7 +5,7 @@
 
 This is a program that allows a user to sign up and log in, searches for books using GoogleBooks, and can save books to a User's profile. Unfortunately, it's got a couple of issues I hope to fix later, namely, the remove book function doesn't work.
 
-Here's a link to the deployed site:
+Here's a link to the deployed site: https://book-search-dfm-917cd4c03351.herokuapp.com/
 
 Here's a screenshot: 
 
