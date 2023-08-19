@@ -62,7 +62,7 @@ const SearchBooks = () => {
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
+console.log(token);
     if (!token) {
       return false;
     }
@@ -81,7 +81,9 @@ const SearchBooks = () => {
         },
       });
 
-      if (!data.addBook) {
+const user = data.addBook;
+
+      if (!user || user.savedBooks.length === 0) {
         throw new Error("Failed to add new book");
       }
 

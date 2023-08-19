@@ -28,12 +28,17 @@ export const ADD_BOOK = gql`
   mutation addBook($input: BookInput!) {
     addBook(input: $input) {
       _id
-      authors
-      description
-      bookId
-      image
-      link
-      title
+      username
+      email
+      savedBooks {
+        _id
+        authors
+        description
+        bookId
+        image
+        link
+        title
+      }
     }
   }
 `;
